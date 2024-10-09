@@ -9,7 +9,7 @@ useEffect(() => {
 
 const [productList, setProductList] = useState([])
   const getProductsList = async () => {
-    productApi().then(res=>{
+    productApi.gitListProduct().then(res=>{
       console.log(res.data.data);
       setProductList(res.data.data)
     })

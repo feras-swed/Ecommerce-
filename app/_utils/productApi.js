@@ -1,6 +1,18 @@
 import axiosClint from "./axiosClint";
 
-const gitListProduct = async () => axiosClint.get("/products?populate=*");
+class git { 
+    static async gitListProduct() {
+        return axiosClint.get("/products?populate=*");
+    }
 
+    static async gitProductById(id) { 
+        return axiosClint.get(`/products/${id}?populate=*`);
+    }
 
-export default gitListProduct
+    static async gitProductByCategory(category){
+    //    var category = "MARKETING"
+        return axiosClint.get(`/products?filters[category][$eq]=${category}&populate=*`)
+    }
+}
+
+export default git;
