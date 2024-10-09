@@ -1,7 +1,18 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
+import { UserButton, useUser } from '@clerk/nextjs'
+import { ShoppingCart } from 'lucide-react';
+import { useEffect, useState } from 'react';
 function Header() {
-  return (
+  const [isLogeing, setIsLogeing] = useState(false);
+
+  useEffect(() => {
+    setIsLogeing(window.location.href.toString().includes('sign-in'));
+  });
+
+const {user} = useUser();
+  return ! isLogeing && (
     <div>
         <header className="bg-white">
   <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 shadow-md">
@@ -40,10 +51,11 @@ function Header() {
       </div>
 
       <div className="flex items-center gap-4">
+       {!user ?
         <div className="sm:flex sm:gap-4">
           <a
             className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-primary/50"
-            href="#"
+            href="http://localhost:3000/sign-in"
           >
             Login
           </a>
@@ -57,7 +69,14 @@ function Header() {
             </a>
           </div>
         </div>
+        :
+        <div className="flex items-center gap-4">
+          <h2 className='text-black flex gap-1 cursor-pointer text-sm font-bold'><ShoppingCart/>(0)</h2>
 
+        <UserButton afterSwitchSessionUrl='/'/>
+        </div>
+        }
+        
         <div className="block md:hidden">
           <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
             <svg

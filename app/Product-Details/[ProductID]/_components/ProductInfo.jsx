@@ -1,7 +1,21 @@
+"use client"
 import React from 'react'
 import { AlertOctagon, ShoppingCart,BadgeCheck } from 'lucide-react'
-
+import { useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 function ProductInfo({ProductD}) {
+    const {user} = useUser();
+    const ruter = useRouter();
+    const HandleAddToCart = ()=>{
+        if(!user){
+            ruter.push('/sign-in')
+            
+        }
+        else{
+
+        }
+
+    }
   return (
     <div className="">
         
@@ -25,7 +39,7 @@ function ProductInfo({ProductD}) {
         </h2>
       <h2 className="text-2xl font-bold text-primary">{`$ ${ProductD?.price}`}</h2>
 
-      <button className='flex gap-2 items-center bg-primary px-4 py-3 text-sm font-medium text-white shadow hover:bg-primary/50 focus:outline-none focus:ring active:bg-green-600 rounded-lg '>
+      <button onClick={() => HandleAddToCart(ProductD?.id)} className='flex gap-2 items-center bg-primary px-4 py-3 text-sm font-medium text-white shadow hover:bg-primary/50 focus:outline-none focus:ring active:bg-green-600 rounded-lg '>
         <ShoppingCart/>
         Add to Cart
       </button>

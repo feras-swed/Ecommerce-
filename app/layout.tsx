@@ -2,14 +2,21 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./_components/Header";
 import Footer from "./_components/Footer";
-import {Roboto_Slab} from 'next/font/google'
+import { Roboto_Slab } from "next/font/google";
 
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 const roboto = Roboto_Slab({
-  subsets: ['latin'],
-  variable: '--font-roboto',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
-})
+  subsets: ["latin"],
+  variable: "--font-roboto",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,16 +29,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={` ${roboto.className}  bg-gray-50 `}
-      >
-        <Header />
+    <ClerkProvider>
+      <html lang="en">
+        <body className={` ${roboto.className}  bg-gray-50 `}>
+          <Header />
+          <SignedIn></SignedIn>
+          {children}
 
-        {children}
-        
-        <Footer />
-      </body>
-    </html>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
