@@ -13,6 +13,18 @@ class git {
     //    var category = "MARKETING"
         return axiosClint.get(`/products?filters[category][$eq]=${category}&populate=*`)
     }
+
+    static async addToCarde(data) {
+        //    var category = "MARKETING"
+            return axiosClint.post(`/carts`,data)
+        }
+
+    static async getCart(email) {
+        return axiosClint.get(`/carts?populate[products][populate]=banner&filters[email][$eq]=${email}`)
+    }
+    static async deleteCart(id) {
+        return axiosClint.delete(`/carts/${id}`)
+    }
 }
 
 export default git;

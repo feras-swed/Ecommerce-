@@ -4,12 +4,16 @@ import Image from 'next/image'
 import { UserButton, useUser } from '@clerk/nextjs'
 import { ShoppingCart } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useCartContext } from '@/app/_context/CardContext'; // هنا التغيير الرئيسي
+import Cart from './Cart';
 function Header() {
   const [isLogeing, setIsLogeing] = useState(false);
+  const { cartCount } = useCartContext();
+  const [openCart, setOpenCart] = useState(false);
 
   useEffect(() => {
     setIsLogeing(window.location.href.toString().includes('sign-in'));
-  });
+  },[]);
 
 const {user} = useUser();
   return ! isLogeing && (
@@ -71,9 +75,11 @@ const {user} = useUser();
         </div>
         :
         <div className="flex items-center gap-4">
-          <h2 className='text-black flex gap-1 cursor-pointer text-sm font-bold'><ShoppingCart/>(0)</h2>
+          <h2 className='text-black flex gap-1 cursor-pointer text-sm font-bold'><ShoppingCart onClick={() => setOpenCart(!openCart) } />({cartCount?.data?.length})</h2>
 
         <UserButton afterSwitchSessionUrl='/'/>
+        {openCart && <Cart/>}
+        
         </div>
         }
         

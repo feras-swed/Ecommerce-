@@ -25,7 +25,7 @@ interface Params {
 export default function ProductDetails({ params }: { params: Params }) {
 
     const path = usePathname();
-    var pathArra = path?.split("/");
+    const  pathArra = path?.split("/");
 
     const [ProductDetails, setProductDetails] = useState<Product | null>(null);
   const [ProductLestcategory, setProductLestcategory] = useState([]);

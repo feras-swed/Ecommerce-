@@ -3,19 +3,32 @@ import React from 'react'
 import { AlertOctagon, ShoppingCart,BadgeCheck } from 'lucide-react'
 import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
+import productApi from "@/app/_utils/productApi"
+import { useCartContext } from '@/app/_context/CardContext';
 function ProductInfo({ProductD}) {
     const {user} = useUser();
     const ruter = useRouter();
+    const { cartCount, updateCartCount } = useCartContext();
     const HandleAddToCart = ()=>{
         if(!user){
             ruter.push('/sign-in')
             
         }
         else{
+            const data = {
+              data:{
 
+                  username : user.fullName,
+                    products: [ProductD?.documentId],
+                    email: user.primaryEmailAddress.emailAddress
+                }
+            }
+            productApi.addToCarde(data).then( () =>{console.log(cartCount)
+                updateCartCount(); 
+            }).catch(err => console.log("error:" + err));
         }
-
     }
+
   return (
     <div className="">
         
@@ -39,7 +52,7 @@ function ProductInfo({ProductD}) {
         </h2>
       <h2 className="text-2xl font-bold text-primary">{`$ ${ProductD?.price}`}</h2>
 
-      <button onClick={() => HandleAddToCart(ProductD?.id)} className='flex gap-2 items-center bg-primary px-4 py-3 text-sm font-medium text-white shadow hover:bg-primary/50 focus:outline-none focus:ring active:bg-green-600 rounded-lg '>
+      <button onClick={() => HandleAddToCart(ProductD?.documentId)} className='flex gap-2 items-center bg-primary px-4 py-3 text-sm font-medium text-white shadow hover:bg-primary/50 focus:outline-none focus:ring active:bg-green-600 rounded-lg '>
         <ShoppingCart/>
         Add to Cart
       </button>
