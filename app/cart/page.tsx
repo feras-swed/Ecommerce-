@@ -2,7 +2,9 @@
 import React from "react";
 import { useCartContext } from "@/app/_context/CardContext"; // هنا التغيير الرئيسي
 import productApi from "@/app/_utils/productApi";
+import { useRouter } from "next/navigation";
 function Cart() {
+  const router = useRouter();
   const { cartCount , updateCartCount} = useCartContext();
   const getTotalAmunt = () => {
       let totalAmunt = 0;
@@ -29,7 +31,7 @@ function Cart() {
           <div className="mt-8">
             <ul className="space-y-4">
               {cartCount?.data?.map((product) => (
-                   <li className="flex items-center gap-4">
+                   <li key={product?.documentId} className="flex items-center gap-4">
                    <img
                      src={`http://localhost:1337${product?.products[0]?.banner?.url}`}
                      alt=""
@@ -72,6 +74,7 @@ function Cart() {
                      </button>
                    </div>
                  </li>
+
               ))}
 
            
@@ -88,16 +91,16 @@ function Cart() {
                 </dl>
 
                 <div className="flex justify-end">
-                  <a
-                    href="#"
+                  <button
+                    onClick={() => router.push("/checkout?amount=" + getTotalAmunt())}
                     className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                   >
                     Checkout
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
+          </div> 
         </div>
       </div>
     </section>
