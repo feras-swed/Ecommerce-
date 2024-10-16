@@ -32,23 +32,23 @@ const {user} = useUser();
         <nav aria-label="Global">
           <ul className="flex items-center gap-6 text-sm">
             <li>
-              <a className="text-gray-500 transition hover:text-gray-500/75" href="#"> Home </a>
+              <a className="text-gray-500 transition hover:text-gray-500/75" href="/"> Home </a>
             </li>
 
             <li>
-              <a className="text-gray-500 transition hover:text-gray-500/75" href="#"> Explore </a>
+              <a className="text-gray-500 transition hover:text-gray-500/75" href="/"> Explore </a>
             </li>
 
             <li>
-              <a className="text-gray-500 transition hover:text-gray-500/75" href="#"> Projects </a>
+              <a className="text-gray-500 transition hover:text-gray-500/75" href="/"> Projects </a>
             </li>
 
             <li>
-              <a className="text-gray-500 transition hover:text-gray-500/75" href="#"> About Us </a>
+              <a className="text-gray-500 transition hover:text-gray-500/75" href="/"> About Us </a>
             </li>
 
             <li>
-              <a className="text-gray-500 transition hover:text-gray-500/75" href="#"> Content Us </a>
+              <a className="text-gray-500 transition hover:text-gray-500/75" href="/"> Content Us </a>
             </li>
           </ul>
         </nav>

@@ -36,7 +36,7 @@ export default function RootLayout({
           <Header />
           <SignedIn></SignedIn>
           {children}
-          <Footer />
+          {/* <Footer /> */}
         </body>
       </html>
       </CartProvider>

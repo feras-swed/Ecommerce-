@@ -25,6 +25,9 @@ class git {
     static async deleteCart(id) {
         return axiosClint.delete(`/carts/${id}`)
     }
+    static async AddOrder (data) {
+        return axiosClint.post(`/orders`,data)
+    }
 }
 
 export default git;
