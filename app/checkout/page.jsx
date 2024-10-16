@@ -10,15 +10,17 @@ const stripePromise = loadStripe( process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 function Checkout() {
 
   const stripePromise1 = useSearchParams();
+  const amount = Number(stripePromise1.get('amount') ?? 0); //  إذا كانت  amount  غير مُعرّفة،  فاستخدم  0
+
 
     const options ={
         mode: 'payment',
         currency:'usd',
-        amount: Number(stripePromise1.get('amount'))*100,
+        amount: amount*100,
     }
   return (
     <Elements stripe={stripePromise} options={options}>
-    <CheckoutForm amount={Number(stripePromise1.get('amount'))} />
+    <CheckoutForm amount={amount} />
   </Elements>
   )
 }
