@@ -3,6 +3,7 @@ import React from "react";
 import { useCartContext } from "@/app/_context/CardContext"; // هنا التغيير الرئيسي
 import productApi from "@/app/_utils/productApi";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 
 export default function CartC() {
 
@@ -35,11 +36,13 @@ export default function CartC() {
           <ul className="space-y-4">
             {cartCount?.data?.map((product) => (
                  <li key={product?.documentId} className="flex items-center gap-4">
-                 <img
-                   src={`http://localhost:1337${product?.products[0]?.banner?.url}`}
-                   alt=""
-                   className="size-16 rounded object-cover"
-                 />
+                <Image
+  src={`http://localhost:1337${product?.products[0]?.banner?.url}`}
+  alt=""
+  className="size-16 rounded object-cover"
+  width={16} // Add the width and height props to specify the image size
+  height={16}
+/>
  
                  <div>
                    <h3 className="text-sm text-gray-900">{product?.products[0]?.title}</h3>
