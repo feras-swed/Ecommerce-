@@ -2,7 +2,7 @@
 // import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./_components/Header";
-import Footer from "./_components/Footer";
+// import Footer from "./_components/Footer";
 import { Roboto_Slab } from "next/font/google";
 import CartProvider from "@/app/_context/CardContext"
 import {
